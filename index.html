@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AquaViz</title>
+        <title>CalendarViz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,9 +22,13 @@
         <![endif]-->
         <div id="wrapper">
           <div id="header">
-            <h2>AquaViz</h2>
+            <h2>CalendarViz</h2>
             <div id="element-label"></div>
           </div>
+          <form id="weekpickerform" action="javascript:$('body').data('reset')();">
+            <input id="weekpicker" type="week" value="2014-W08">
+            <input type="submit" value="Go">
+          </form>
           <div id="content">
             <div id="trash" class="hidden clearfix"><div class="icon"></div><div>Remove</div></div>
             <svg id="canvas"></svg>
@@ -59,6 +63,10 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/vendor/d3.v3.min.js"></script>
         <script src="js/vendor/list.min.js"></script>
+        <script src="js/vendor/ical/underscore.min.js"></script>
+        <script src="js/vendor/ical/rrule.js"></script>
+        <!-- // <script src="js/vendor/ical/nlp.js"></script> -->
+        <script src="js/vendor/ical/ical.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/pixellayer.js"></script>
         <script src="js/main.js"></script>

@@ -15,7 +15,7 @@ and data nodes.
 
 Operator nodes represent one of the set operators: AND or OR. They may have 
 other nodes as children. Data nodes represent a set of items. They compose the
-leaves of the tree.
+leaves of the tree.m-
 
 The membership of an element (e.g. compound) in the data set represented by an
 expression tree can be calculated by calling the pixelValue() function on the
@@ -100,7 +100,7 @@ function OperatorNode(operator){
         if(_operator == "AND"){
             for(var i = 0 ; i < _children.length; i++){
                 curChild = _children[i];
-                if(curChild.data && !curChild.data().has(element)){ return 0; }
+                if(curChild.data && curChild.data().has(element)){ return 0; }
                 else if(curChild.pixelValue && curChild.pixelValue(element) == 0){ return 0; }
             }
             return 1;
@@ -115,7 +115,7 @@ function OperatorNode(operator){
                 // else if(curChild.pixelValue && curChild.pixelValue(element) > 0){ sum += 1; }
                 else if(curChild.pixelValue){ sum += curChild.pixelValue(element); }
             }
-            return parseFloat(sum) / _children.length;
+            return 1 - parseFloat(sum) / _children.length;
         }
     };
     
@@ -644,13 +644,13 @@ function PixelLayer(svg){
             .attr('width', pixelX.rangeBand())
             .attr('height', pixelY.rangeBand())
             .attr('transform', function(d,i){
-                var row = parseInt(i / rows);
-                var col = i - row * rows;
+                var col = parseInt(i / rows);
+                var row = i % rows;
                 return "translate(" + pixelX(col) + "," + pixelY(row) + ")";
             })
             .each(function(d,i){
                 var pixel = d3.select(this);
-                var value = _chart.pixelValue(d.name);
+                var value = _chart.pixelValue(d.data);
                 var color = pixelColor(d,i);
                 var fill = d3.interpolateRgb(d3.rgb(0,0,0), color)(value);
             
